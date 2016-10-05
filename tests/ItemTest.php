@@ -6,6 +6,7 @@
     */
 
     require_once "src/Item.php";
+    require_once "src/User.php";
 
     $server = 'mysql:host=localhost:8889;dbname=warehouse_test';
     $username = 'root';
@@ -17,7 +18,7 @@
         protected function tearDown()
         {
             Item::deleteAll();
-            //User::deleteAll();
+            User::deleteAll();
         }
         function testSave()
         {

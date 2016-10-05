@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <meta charset="utf-8">
+        <title>Community Warehouse: Create Your Profile</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1> Members </h1>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="jumbotron form-group">
+                        <form action="/profile_create" method="post">
+                            <label for="new_member_name">Enter your name:</label>
+                            <input id="new_member_name" name="new_member_name" type="text" required class="form-control">
+                            <label for="new_member_email">Enter your e-mail:</label>
+                            <input id="new_member_email" name="new_member_email" type="text" required class="form-control"><br>
+                            <button class="btn btn-success" type="submit">Submit</button><br>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="jumbotron">
+                        <h2>Existing Members: </h2>
+                        {% if current_members is not empty %}
+                        {% for member in current_members %}
+                            <li><a href="/member{{member.getId}}">{{member.getName}}</a></li>
+                        {% endfor %}
+                        {% else %}
+                            <h4>There are no members yet</h4>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

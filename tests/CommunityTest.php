@@ -7,6 +7,7 @@
 
     require_once "src/Community.php";
     require_once "src/User.php";
+    require_once "src/Item.php";
 
     $server = 'mysql:host=localhost:8889;dbname=warehouse_test';
     $username = 'root';
@@ -20,7 +21,9 @@
         protected function tearDown()
         {
              Community::deleteAll();
-            //  Client::deleteAll();
+             Item::deleteAll();
+             User::deleteAll();
+
         }
 
         function test_getId()
