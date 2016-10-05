@@ -118,10 +118,10 @@
             $owner_id = $test_user->getId();
             $name = "Leaf Blower";
             $image = null;
-            $status = "Available";
-            $test_item = new Item($owner_id, $name, $image, $status)
+            $status = true;
+            $test_item = new Item($owner_id, $name, $image, $status);
             $test_item->save();
-            $test_item2 = new Item($owner_id, 'Video Camera', $image, $status)
+            $test_item2 = new Item($owner_id, 'Video Camera', $image, $status);
             $test_item2->save();
 
             // Act

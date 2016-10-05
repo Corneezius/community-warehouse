@@ -64,7 +64,8 @@
                 $name = $item['name'];
                 $image = $item['image'];
                 $status = $item['status'];
-                $new_item = new Item($owner_id, $name, $image, $status);
+                $id = $item['id'];
+                $new_item = new Item($owner_id, $name, $image, $status, $id);
                 array_push($items, $new_item);
             }
             return $items;

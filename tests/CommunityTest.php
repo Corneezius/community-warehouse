@@ -20,7 +20,6 @@
         protected function tearDown()
         {
              Community::deleteAll();
-            //  Client::deleteAll();
         }
 
         function test_getId()

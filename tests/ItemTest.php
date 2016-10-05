@@ -6,6 +6,7 @@
     */
 
     require_once "src/Item.php";
+    require_once 'src/User.php';
 
     $server = 'mysql:host=localhost:8889;dbname=warehouse_test';
     $username = 'root';
@@ -17,12 +18,15 @@
         protected function tearDown()
         {
             Item::deleteAll();
-            //User::deleteAll();
+            User::deleteAll();
         }
         function testSave()
         {
             //ARRANGE
-            $owner_id = null;
+            $test_user = new User('Jane', 'email@gmail.com');
+            $test_user->save();
+
+            $owner_id = $test_user->getId();
             $name = "3D Printer";
             $image = null;
             $status = true;
@@ -37,7 +41,10 @@
         function testGetAll()
         {
             //ARRANGE
-            $owner_id = null;
+            $test_user = new User('Jane', 'email@gmail.com');
+            $test_user->save();
+
+            $owner_id = $test_user->getId();
             $name = "3D Printer";
             $image = null;
             $status = true;
@@ -78,7 +85,10 @@
         function testFind()
        {
            //ARRANGE
-           $owner_id = null;
+           $test_user = new User('Jane', 'email@gmail.com');
+           $test_user->save();
+
+           $owner_id = $test_user->getId();
            $name = "3D Printer";
            $image = null;
            $status = true;
@@ -136,7 +146,10 @@
        function testDelete()
         {
             //ARRANGE
-            $owner_id = null;
+            $test_user = new User('Jane', 'email@gmail.com');
+            $test_user->save();
+
+            $owner_id = $test_user->getId();
             $name = "3D Printer";
             $image = null;
             $status = true;
