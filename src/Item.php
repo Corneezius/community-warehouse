@@ -56,7 +56,7 @@
 
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO items (owner_id, name, status, image) VALUES ({$this->getOwnerId()}, '{$this->getName()}', {$this->getStatus()}, '{$this->getImage()}');");
+            $GLOBALS['DB']->exec("INSERT INTO items (name, status, image, owner_id) VALUES ('{$this->getName()}', {$this->getStatus()}, '{$this->getImage()}', {$this->getOwnerId()});");
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 

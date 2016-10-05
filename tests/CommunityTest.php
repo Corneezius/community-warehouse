@@ -23,7 +23,6 @@
              Community::deleteAll();
              Item::deleteAll();
              User::deleteAll();
-
         }
 
         function test_getId()
