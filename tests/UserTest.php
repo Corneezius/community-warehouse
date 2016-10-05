@@ -5,6 +5,7 @@
     */
 
     require_once "src/User.php";
+    require_once "src/Item.php";
 
     $server = 'mysql:host=localhost:3307;dbname=warehouse_test';
     $username = 'root';
@@ -16,6 +17,7 @@
         protected function tearDown()
         {
             User::deleteAll();
+            Item::deleteAll();
         }
 
         function test_save()
@@ -106,5 +108,71 @@
             // Assert
             $this->assertEquals('Emily', $test_user->getName());
         }
+
+        function test_getOwnedItems()
+        {
+            // Arrange
+            $test_user = new User('Jane', 'email@gmail.com');
+            $test_user->save();
+
+            $owner_id = $test_user->getId();
+            $name = "Leaf Blower";
+            $image = null;
+            $status = "Available";
+            $test_item = new Item($owner_id, $name, $image, $status)
+            $test_item->save();
+            $test_item2 = new Item($owner_id, 'Video Camera', $image, $status)
+            $test_item2->save();
+
+            // Act
+            $result = $test_user->getOwnedItems();
+
+            // Assert
+            $this->assertEquals([$test_item, $test_item2], $result);
+        }
+
+        // function test_checkOut()
+        // {
+        //     // Arrange
+        //     $test_user = new User('Jane', 'email@gmail.com');
+        //     $test_user->save();
+        //
+        //     $owner_id = $test_user->getId();
+        //     $name = "Leaf Blower";
+        //     $image = null;
+        //     $status = "Available";
+        //     $test_item = new Item($owner_id, $name, $image, $status)
+        //     $test_item->save();
+        //
+        //     // Act
+        //     $test_user->checkOut($test_item);
+        //
+        //     // Assert
+        //     $this->assertEquals([$test_item], $test_user->getCheckoutHistory());
+        // }
+
+        // function test_getCheckOutHistory()
+        // {
+        //     // Arrange
+        //     $test_user = new User('Jane', 'email@gmail.com');
+        //     $test_user->save();
+        //
+        //     $owner_id = $test_user->getId();
+        //     $name = "Leaf Blower";
+        //     $image = null;
+        //     $status = "Available";
+        //     $test_item = new Item($owner_id, $name, $image, $status)
+        //     $test_item->save();
+        //     $test_user->checkOut($test_item);
+        //     $test_item2 = new Item($owner_id, 'Video Camera', $image, $status)
+        //     $test_item2->save();
+        //     $test_user->checkOut($test_item2);
+        //
+        //     // Act
+        //
+        //
+        //     // Assert
+        //     $this->assertEquals([$test_item], $test_user->getCheckoutHistory());
+        // }
     }
  ?>

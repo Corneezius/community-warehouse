@@ -54,6 +54,22 @@
             $this->setName($new_name);
         }
 
+        function getOwnedItems()
+        {
+            $got_items = $GLOBALS['DB']->query("SELECT * FROM items WHERE owner_id = {$this->getId()};");
+            $items = [];
+            foreach ($got_items as $item)
+            {
+                $owner_id = $item['owner_id'];
+                $name = $item['name'];
+                $image = $item['image'];
+                $status = $item['status'];
+                $new_item = new Item($owner_id, $name, $image, $status);
+                array_push($items, $new_item);
+            }
+            return $items;
+        }
+
         static function getAll()
         {
             $got_users = $GLOBALS['DB']->query("SELECT * FROM users;");
