@@ -77,5 +77,34 @@
             // Assert
             $this->assertEquals($test_user2, $result);
         }
+
+        function test_delete()
+        {
+            // Arrange
+            $test_user = new User('Jane', 'email@gmail.com');
+            $test_user->save();
+
+            $test_user2 = new User('John', 'test@gmail.com');
+            $test_user2->save();
+
+            // Act
+            $test_user->delete();
+
+            // Assert
+            $this->assertEquals([$test_user2], User::getAll());
+        }
+
+        function test_update()
+        {
+            // Arrange
+            $test_user = new User('Jane', 'email@gmail.com');
+            $test_user->save();
+
+            // Act
+            $test_user->update('Emily');
+
+            // Assert
+            $this->assertEquals('Emily', $test_user->getName());
+        }
     }
  ?>
