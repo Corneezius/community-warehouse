@@ -59,7 +59,23 @@
             $result = User::deleteAll();
 
             // Assert
-            $this->assertEquals([], User::getALl());
+            $this->assertEquals([], User::getAll());
+        }
+
+        function test_find()
+        {
+            // Arrange
+            $test_user = new User('Jane', 'email@gmail.com');
+            $test_user->save();
+
+            $test_user2 = new User('John', 'test@gmail.com');
+            $test_user2->save();
+
+            // Act
+            $result = User::find($test_user2->getId());
+
+            // Assert
+            $this->assertEquals($test_user2, $result);
         }
     }
  ?>

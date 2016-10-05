@@ -14,7 +14,7 @@
 
         function getId()
         {
-            return (int) $this->id();
+            return $this->id;
         }
 
         function getName()
@@ -58,6 +58,20 @@
         static function deleteAll()
         {
             $GLOBALS['DB']->exec("DELETE FROM users;");
+        }
+
+        static function find($search_id)
+        {
+            $found_user = null;
+            $users = User::getAll();
+            foreach($users as $user)
+            {
+                if ($user->getId() == $search_id)
+                {
+                    $found_user = $user;
+                }
+            }
+            return $found_user;
         }
     }
  ?>
