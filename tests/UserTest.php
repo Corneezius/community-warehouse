@@ -7,7 +7,7 @@
     require_once "src/User.php";
     require_once "src/Item.php";
 
-    $server = 'mysql:host=localhost:3307;dbname=warehouse_test';
+    $server = 'mysql:host=localhost:8889;dbname=warehouse_test';
     $username = 'root';
     $password = 'root';
     $DB = new PDO ($server, $username, $password);
