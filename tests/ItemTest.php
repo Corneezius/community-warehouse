@@ -167,6 +167,21 @@
             $this->assertEquals([$test_item2], Item::getAll());
         }
 
+        function test_search()
+        {
+            //ARRANGE
+            $test_user = new User('Jane', 'email@gmail.com');
+            $test_user->save();
+
+            $test_item = new Item($test_user->getId(), '3D Printer', null, true);
+            $test_item->save();
+
+            // Act
+            $result = Item::search('3D Printer');
+
+            // Assert
+            $this->assertEquals([$test_item], $result);
+        }
 
     }
 

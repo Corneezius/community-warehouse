@@ -112,6 +112,22 @@
             $GLOBALS['DB']->exec("DELETE FROM items WHERE id = {$this->getId()};");
         }
 
+        static function search($keywords)
+        {
+            chop($keywords);
+            $items = Item::getAll();
+            $found_items = [];
+            foreach($items as $item)
+            {
+                $item_name = strtolower($item->getName());
+                $lower_keywords = strtolower($keywords);
+                if ($item_name === $lower_keywords)
+                {
+                    array_push($found_items, $item);
+                }
+            }
+            return $found_items;
+        }
 
     }
 
