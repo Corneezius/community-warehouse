@@ -8,6 +8,7 @@
     <body>
         <div class="container">
             <h1> Communities </h1>
+            <a href="/"><p>Go Back to Main Page</p></a>
             <div class="row">
                 <div class="col-md-6">
                     <div class="jumbotron form-group">
@@ -24,7 +25,8 @@
                         {% if current_communities is not empty %}
                         {% for community in current_communities %}
                             <li><a href="/community{{community.getId}}">{{community.getName}}</a></li>
-                        {% endfor %}
+                        {% endfor %}<br>
+                        <a href="/delete_all_communities" type="button" class="btn btn-danger">Delete All</a>
                         {% else %}
                             <h4>There are no communities yet</h4>
                             <img class="img-responsive" src="/img/community.jpg">
