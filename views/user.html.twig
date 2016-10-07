@@ -11,31 +11,8 @@
             <a href="/"><p>Go Back to Main Page</p></a>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="jumbotron form-group">
-                        <h3>Offer your items to share:</h3>
-                        <form action="/item_create" method="post">
-                            <input name="owner_id" type="hidden" value="{{given_member.getId}}">
-                            <input name="status" type="hidden" value="true">
-                            <label for="item_name">Item name:</label>
-                            <input id="item_name" name="item_name" type="text" required class="form-control"><br>
-                            <label class="btn-bs-file">Upload Image</label>
-                            <input type="file" name="image"><br>
-                            <button class="btn btn-success" type="submit">Share</button><br>
-                        </form>
-                    </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="jumbotron">
-                        <h2>Currently available items you can borrow: </h2>
-                        {% if current_items is not empty %}
-                        {% for item in current_items %}
-                            <li><a href="/member{{item.getId}}">{{item.getName}}</a><img src="{{item.getImage}}" class="img-responsive"></li>
-                        {% endfor %}<br>
-                        {% else %}
-                            <h4>There are no items yet</h4>
-                            <img src="/img/naan.jpg" class="img-responsive">
-                        {% endif %}
-                    </div>
                 </div>
             </div>
         </div>

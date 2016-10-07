@@ -3,16 +3,12 @@
     {
         private $owner_id;
         private $name;
-        private $image;
-        private $status;
         private $id;
 
-        function __construct($owner_id, $name, $image, $status, $id=null)
+        function __construct($owner_id, $name, $id=null)
         {
             $this->owner_id = $owner_id;
             $this->name = $name;
-            $this->image = $image;
-            $this->status = $status;
             $this->id = $id;
         }
 
@@ -32,31 +28,15 @@
         {
             $this->name = $new_name;
         }
-        function getImage()
-        {
-            return $this->image;
-        }
-        function setImage($new_image)
-        {
-            $this->image = $new_image;
-        }
-        function getStatus()
-        {
-            return $this->status;
-        }
-        function setStatus($new_status)
-        {
-            $this->status = $new_status;
-        }
+
         function getId()
         {
             return $this->id;
         }
 
-
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO items (name, status, image, owner_id) VALUES ('{$this->getName()}', {$this->getStatus()}, '{$this->getImage()}', {$this->getOwnerId()});");
+            $GLOBALS['DB']->exec("INSERT INTO items (name, owner_id) VALUES ('{$this->getName()}', {$this->getOwnerId()});");
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
@@ -68,10 +48,8 @@
             {
                 $owner_id = $item['owner_id'];
                 $name = $item['name'];
-                $image = $item['image'];
-                $status = $item['status'];
                 $id = $item['id'];
-                $test_item = new Item($owner_id, $name, $image, $status, $id);
+                $test_item = new Item($owner_id, $name, $id);
                 array_push($all_items, $test_item);
             }
             return $all_items;
@@ -100,20 +78,10 @@
             $GLOBALS['DB']->exec("UPDATE items SET name = '{$new_name}' WHERE id = {$this->getId()};");
             $this->setName($new_name);
         }
-
-        function updateStatus($new_status)
-        {
-            $GLOBALS['DB']->exec("UPDATE items SET status = {$new_status} WHERE id = {$this->getId()};");
-            $this->setStatus($new_status);
-        }
-
+        
         function delete()
         {
             $GLOBALS['DB']->exec("DELETE FROM items WHERE id = {$this->getId()};");
         }
-
-
     }
-
-
  ?>

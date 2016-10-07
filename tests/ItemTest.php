@@ -29,9 +29,7 @@
 
             $owner_id = $test_user->getId();
             $name = "3D Printer";
-            $image = null;
-            $status = true;
-            $test_item = new Item($owner_id, $name, $image, $status);
+            $test_item = new Item($owner_id, $name);
 
             //ACT
             $test_item->save();
@@ -47,13 +45,11 @@
 
             $owner_id = $test_user->getId();
             $name = "3D Printer";
-            $image = null;
-            $status = true;
-            $test_item = new Item($owner_id, $name, $image, $status);
+            $test_item = new Item($owner_id, $name);
             $test_item->save();
 
             $name2 = "Power washer";
-            $test_item2 = new Item($owner_id, $name2, $image, $status);
+            $test_item2 = new Item($owner_id, $name2);
             $test_item2->save();
 
             //ACT
@@ -67,13 +63,11 @@
             //ARRANGE
             $owner_id = null;
             $name = "3D Printer";
-            $image = null;
-            $status = true;
-            $test_item = new Item($owner_id, $name, $image, $status);
+            $test_item = new Item($owner_id, $name);
             $test_item->save();
 
             $name2 = "Power washer";
-            $test_item2 = new Item($owner_id, $name2, $image, $status);
+            $test_item2 = new Item($owner_id, $name2);
             $test_item2->save();
 
             //ACT
@@ -91,13 +85,11 @@
 
            $owner_id = $test_user->getId();
            $name = "3D Printer";
-           $image = null;
-           $status = true;
-           $test_item = new Item($owner_id, $name, $image, $status);
+           $test_item = new Item($owner_id, $name);
            $test_item->save();
 
            $name2 = "Power washer";
-           $test_item2 = new Item($owner_id, $name2, $image, $status);
+           $test_item2 = new Item($owner_id, $name2);
            $test_item2->save();
 
            //ACT
@@ -111,9 +103,7 @@
            //ARRANGE
            $owner_id = null;
            $name = "3D Printer";
-           $image = null;
-           $status = true;
-           $test_item = new Item($owner_id, $name, $image, $status);
+           $test_item = new Item($owner_id, $name);
            $test_item->save();
 
            $new_name = "Laser Printer";
@@ -125,24 +115,6 @@
            $this->assertEquals("Laser Printer", $test_item->getName());
        }
 
-       function testUpdateStatus()
-       {
-           //ARRANGE
-           $owner_id = null;
-           $name = "3D Printer";
-           $image = null;
-           $status = true;
-           $test_item = new Item($owner_id, $name, $image, $status);
-           $test_item->save();
-
-           $new_status = false;
-
-           //ACT
-           $test_item->updateStatus($new_status);
-
-           //ASSERT
-           $this->assertEquals(false, $test_item->getStatus());
-       }
 
        function testDelete()
         {
@@ -152,13 +124,11 @@
 
             $owner_id = $test_user->getId();
             $name = "3D Printer";
-            $image = null;
-            $status = true;
-            $test_item = new Item($owner_id, $name, $image, $status);
+            $test_item = new Item($owner_id, $name);
             $test_item->save();
 
             $name2 = "Power washer";
-            $test_item2 = new Item($owner_id, $name2, $image, $status);
+            $test_item2 = new Item($owner_id, $name2);
             $test_item2->save();
 
             //ACT
@@ -167,9 +137,5 @@
             //ASSERT
             $this->assertEquals([$test_item2], Item::getAll());
         }
-
-
     }
-
-
  ?>
