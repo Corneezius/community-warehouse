@@ -3,33 +3,30 @@
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <meta charset="utf-8">
-        <title>Community Warehouse: Items</title>
+        <title>Item: {{given_item.getName}}</title>
     </head>
     <body>
         <div class="container">
-            <h1> Items </h1>
+            <h1> Item: {{given_item.getName}} </h1>
             <a href="/"><p>Go Back to Main Page</p></a>
             <div class="row">
                 <div class="col-md-6">
                     <div class="jumbotron form-group">
-                        <h3>Offer your items to share:</h3>
-                        <form action="/item_create" method="post">
-                            <input name="status" type="hidden" value="true">
-                            <label for="item_name">Item name:</label>
-                            <input id="item_name" name="item_name" type="text" required class="form-control"><br>
-                            <label for="owner_id">Who is the owner?</label>
-                            <select name="owner_id" class="form-control">
+                        <h3>This <strong>{{given_item.getName}}</strong> is owned and shared by <strong>{{item_owner.getName}}</strong></h3>
+                        <form action="/request{{given_item.getId}}">
+                            <label for="requestor_id">Want to borrow it?</label>
+                            <select name="requestor_id" class="form-control">
                                 {% for member in all_members %}
                                 <option value="{{member.getId}}">{{member.getName}}</option>
                                 {% endfor %}
                             </select><br>
-                            <button class="btn btn-success" type="submit">Share</button><br>
+                            <button class="btn btn-success" type="submit">Request</button><br>
                         </form>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="jumbotron">
-                        <h2>Currently available items you can borrow: </h2>
+                        <h2>Other available items you can borrow: </h2>
                         {% if current_items is not empty %}
                         {% for item in current_items %}
                         <li><a href="/item{{item.getId}}">{{item.getName}}</a></li>

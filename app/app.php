@@ -42,24 +42,22 @@
 
     $app->get("/member{member_id}", function($member_id) use ($app) {
         $given_member = User::find($member_id);
-        return $app["twig"]->render("user.html.twig", array("given_member" => $given_member, "current_communities" => Community::getAll()));
+        return $app["twig"]->render("item.html.twig", array("given_member" => $given_member, "current_communities" => Community::getAll()));
     });
 
 
     //===========================Item: =============================================
     $app->get("/items", function() use ($app) {
-        return $app["twig"]->render("items.html.twig", array("current_items" => Item::getAll()));
+        return $app["twig"]->render("items.html.twig", array("current_items" => Item::getAll(), "all_members" => User::getAll()));
     });
 
     $app->post("/item_create", function() use ($app) {
         $owner_id = $_POST['owner_id'];
         $name = $_POST['item_name'];
-        $image = $_POST['image'];
-        $status = $_POST['status'];
-        $new_item = new Item($owner_id, $name, $image, $status);
+        $new_item = new Item($owner_id, $name);
         $new_item->save();
 
-        return $app["twig"]->render("items.html.twig", array("current_items" => Item::getAll()));
+        return $app["twig"]->render("items.html.twig", array("current_items" => Item::getAll(), "all_members" => User::getAll()));
     });
 
     $app->get("/delete_all_items", function() use ($app) {
@@ -67,23 +65,22 @@
         return $app["twig"]->render("index.html.twig");
     });
 
+    $app->get("/item{item_id}", function($item_id) use ($app) {
+        $given_item = Item::find($item_id);
+        $item_owner = User::find($given_item->getOwnerId());
+        return $app["twig"]->render("item.html.twig", array("all_members" => User::getAll(), "given_item" => $given_item, "item_owner" => $item_owner, "current_items" => Item::getAll()));
+    });
+
+    $app->get("/request{item_id}", function($item_id) use ($app) {
+        $given_item = Item::find($item_id);
+        $item_owner = User::find($given_item->getOwnerId());
+        $requestor_id = $_POST['requestor_id'];
+        var_dump($requestor_id);
+        $requestor = User::find($requestor_id);
+        return $app["twig"]->render("request_confirm.html.twig", array("given_item" => $given_item, "item_owner" => $item_owner, "requestor" => $requestor));
+    });
+
+
+
     return $app;
     ?>
-    //==================Communities:================================
-    // $app->post("/community_create", function() use ($app) {
-    //     $name = $_POST['new_community_name'];
-    //     $new_community = new Community($name);
-    //     $new_community->save();
-    //     return $app["twig"]->render("communities.html.twig", array("current_communities" => Community::getAll()));
-    // });
-    //
-    // $app->get("/delete_all_communities", function() use ($app) {
-    //     Community::deleteAll();
-    //     return $app["twig"]->render("communities.html.twig", array("current_communities" => Community::getAll()));
-    // });
-    //
-    // $app->get("/community{community_id}", function($community_id) use ($app) {
-    //     $given_community = Community::find($community_id);
-    //
-    //     return $app["twig"]->render("community.html.twig", array("current_communities" => Community::getAll()));
-    // });

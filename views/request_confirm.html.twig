@@ -3,18 +3,16 @@
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <meta charset="utf-8">
-        <title>{{given_member.getName}}</title>
+        <title>Request Confirmation</title>
     </head>
     <body>
         <div class="container">
-            <h1>Signed in as: {{given_member.getName}}</h1>
+            <h1> Thank you {{requestor.getName}}! </h1>
             <a href="/"><p>Go Back to Main Page</p></a>
-            <div class="row">
-                <div class="col-md-6">
-                </div>
-                <div class="col-md-6">
-                </div>
+            <div class="jumbortron text-centered">
+                <h3> Your request for {{given_item.getName}} is confirmed. Please contact {{item_owner.getName}} at {{item_owner.getEmail}} for more info. </h3>
             </div>
         </div>
+
     </body>
 </html>
