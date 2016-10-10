@@ -13,7 +13,7 @@
                 <div class="col-md-6">
                     <div class="jumbotron form-group">
                         <h3>This <strong>{{given_item.getName}}</strong> is owned and shared by <strong>{{item_owner.getName}}</strong></h3>
-                        <form action="/request{{given_item.getId}}">
+                        <form action="/request{{given_item.getId}}" method="post">
                             <label for="requestor_id">Want to borrow it?</label>
                             <select name="requestor_id" class="form-control">
                                 {% for member in all_members %}

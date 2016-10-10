@@ -99,5 +99,31 @@
             }
             return $found_user;
         }
+
+        function checkOut($item)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO checkouts (item_id, user_id) VALUES ({$item->getId()}, {$this->getId()});");
+        }
+
+        function getCheckoutHistory()
+        {
+            $rented_items = $GLOBALS['DB']->query("SELECT items.* FROM users
+                INNER JOIN checkouts ON (users.id = checkouts.user_id)
+                JOIN items ON (checkouts.item_id = items.id)
+                WHERE checkouts.user_id = {$this->getId()};");
+            $rented_items = $rented_items->fetchAll(PDO::FETCH_ASSOC);
+            $items = array();
+            foreach($rented_items as $item)
+            {
+                $owner_id = $item['owner_id'];
+                $name = $item['name'];
+                $image = $item['image'];
+                $status = $item['status'];
+                $id = $item['id'];
+                $new_item = new Item($owner_id, $name, $image, $status, $id);
+                array_push($items, $new_item);
+            }
+            return $items;
+        }
     }
  ?>

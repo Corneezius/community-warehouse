@@ -71,12 +71,13 @@
         return $app["twig"]->render("item.html.twig", array("all_members" => User::getAll(), "given_item" => $given_item, "item_owner" => $item_owner, "current_items" => Item::getAll()));
     });
 
-    $app->get("/request{item_id}", function($item_id) use ($app) {
+    $app->post("/request{item_id}", function($item_id) use ($app) {
         $given_item = Item::find($item_id);
         $item_owner = User::find($given_item->getOwnerId());
         $requestor_id = $_POST['requestor_id'];
-        var_dump($requestor_id);
         $requestor = User::find($requestor_id);
+        $requestor->checkOut($given_item);
+
         return $app["twig"]->render("request_confirm.html.twig", array("given_item" => $given_item, "item_owner" => $item_owner, "requestor" => $requestor));
     });
 
